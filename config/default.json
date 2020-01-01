@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://dejja:bW2YMiKg7xl1gcCI@cluster0-sekag.mongodb.net/goannonce?retryWrites=true&w=majority",
+  "jwtSecret": "guesswho"
+}
