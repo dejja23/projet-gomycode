@@ -5,6 +5,7 @@ const app = express();
 
 connectDB();
 app.use(express.json());
+app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/annonces', require('./routes/annonces'));
 app.use('/categories', require('./routes/categories'));

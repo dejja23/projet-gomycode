@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CategorySchema = Schema({
+const CategorySchema = new Schema({
   manufacturer: {
     type: String,
     required: true

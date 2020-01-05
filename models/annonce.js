@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const comment = require('./comment');
 const Schema = mongoose.Schema;
-const AnnonceSchema = Schema({
+const AnnonceSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -31,23 +32,15 @@ const AnnonceSchema = Schema({
     type: Number,
     require: true
   },
-  comments: [
+  likes: [
     {
       user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-      },
-      text: {
-        type: String,
-        required: true
-      },
-
-      date: {
-        type: Date,
-        default: Date.now
       }
     }
   ],
+  Comments: [comment],
   date: {
     type: Date,
     default: Date.now
