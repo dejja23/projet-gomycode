@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.cont {
+  width: 500px !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-text {
+  border: 0 !important;
+  border-bottom: 2px solid !important;
+}
+
+.input-text::placeholder {
+  font-family: 'Roboto';
+}
+input:focus::-webkit-input-placeholder {
+  color: black;
+}
+.input-text:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+.fas {
+  position: absolute;
+  left: 1px;
+  padding: 10px;
+  border-bottom: 2px solid !important;
+}
