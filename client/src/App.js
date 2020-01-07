@@ -8,8 +8,10 @@ export class App extends Component {
     return (
       <Router>
         <Switch>
+          <Route exact path='/' render={() => <h1>Home</h1>} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
+          <Route exact path='/admin' render={() => <h1>admin</h1>} />
         </Switch>
       </Router>
     );

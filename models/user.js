@@ -24,7 +24,9 @@ const UserSchema = new Schema({
   },
   phone: {
     type: Number,
-    required: true
+    required: function() {
+      return this.role === 'Seller';
+    }
   }
 });
 
