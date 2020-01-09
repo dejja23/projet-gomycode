@@ -114,7 +114,7 @@ class Register extends Component {
         <Form className='form' onSubmit={e => this.submitForm(e)}>
           <Col>
             <FormGroup className='d-flex  form-group flex-wrap '>
-              <i className='fas fa-user'></i>
+              <i className='fas fa-user fas1'></i>
               <Input
                 className='input-text ml-3'
                 type='name'
@@ -136,7 +136,7 @@ class Register extends Component {
           </Col>
           <Col>
             <FormGroup className='d-flex  form-group  flex-wrap '>
-              <i className='fas fa-envelope'></i>
+              <i className='fas fa-envelope fas1'></i>
               <Input
                 className='input-text ml-3 '
                 type='email'
@@ -158,7 +158,7 @@ class Register extends Component {
           </Col>
           <Col>
             <FormGroup className='d-flex  form-group flex-wrap '>
-              <i className='fas fa-lock'></i>
+              <i className='fas fa-lock fas1'></i>
               <Input
                 className='input-text ml-3'
                 type='password'
@@ -181,7 +181,7 @@ class Register extends Component {
           <Row className='m-0' xs='1' md='2'>
             <Col>
               <FormGroup className='d-flex  form-group flex-wrap '>
-                <i className='fas fa-user-tag'></i>
+                <i className='fas fa-user-tag fas1'></i>
                 <Input
                   className='input-text ml-3'
                   type='select'
@@ -196,7 +196,7 @@ class Register extends Component {
             {this.state.role === 'Seller' && (
               <Col>
                 <FormGroup className='d-flex  form-group flex-wrap '>
-                  <i className='fas fa-mobile'></i>
+                  <i className='fas fa-mobile fas1'></i>
                   <Input
                     className='input-text ml-2'
                     type='number'

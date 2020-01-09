@@ -20,12 +20,12 @@ router.get('/', async (req, res) => {
               manufacturer: req.query.manufacturer,
               model: req.query.model
             }
-          })
+          }).populate('user', '-password')
         : req.query.manufacturer
         ? await Annonce.find({
             'category.manufacturer': req.query.manufacturer
-          })
-        : await Annonce.find();
+          }).populate('user', '-password')
+        : await Annonce.find().populate('user', '-password');
 
     if (!annonces) return res.status(404).send({ msg: 'There are no ads yet' });
 

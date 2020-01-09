@@ -6,6 +6,10 @@ const CategorySchema = new Schema({
     type: String,
     required: true
   },
+  logo: {
+    type: String,
+    required: true
+  },
   model: {
     type: String,
     required: true

@@ -30,7 +30,7 @@ input:focus::-webkit-input-placeholder {
   -webkit-appearance: none;
   box-shadow: none !important;
 }
-.fas {
+.fas1 {
   position: absolute;
   left: 0;
   padding: 10.5px;

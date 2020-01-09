@@ -52,6 +52,9 @@ router.post(
     check('manufacturer', 'please enter the car manufacturer')
       .not()
       .isEmpty(),
+    check('logo', 'please enter the car logo')
+      .not()
+      .isEmpty(),
     check('model', 'please enter the car model')
       .not()
       .isEmpty()
@@ -62,9 +65,10 @@ router.post(
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
       }
-      const { manufacturer, model } = req.body;
+      const { manufacturer, logo, model } = req.body;
       const category = new Category({
         manufacturer,
+        logo,
         model
       });
       await category.save();
@@ -85,6 +89,9 @@ router.put(
     auth,
     admin,
     check('manufacturer', 'please enter the car manufacturer')
+      .not()
+      .isEmpty(),
+    check('logo', 'please enter the car logo')
       .not()
       .isEmpty(),
     check('model', 'please enter the car model')

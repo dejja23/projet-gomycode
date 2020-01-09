@@ -79,7 +79,7 @@ class Login extends Component {
         <Form className='form' onSubmit={e => this.submitForm(e)}>
           <Col>
             <FormGroup className='d-flex  form-group flex-wrap '>
-              <i className='fas fa-envelope'></i>
+              <i className='fas fa-envelope fas1'></i>
               <Input
                 className='input-text ml-3'
                 type='email'
@@ -101,7 +101,7 @@ class Login extends Component {
           </Col>
           <Col>
             <FormGroup className='d-flex  form-group flex-wrap '>
-              <i className='fas fa-lock'></i>
+              <i className='fas fa-lock fas1'></i>
               <Input
                 className='input-text ml-3'
                 type='password'
