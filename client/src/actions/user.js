@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USERS, USER_ERROR } from './actionTypes';
+import { GET_USERS, DELETE_USER } from './actionTypes';
 
 export const getUsers = () => async dispatch => {
   try {
@@ -9,10 +9,20 @@ export const getUsers = () => async dispatch => {
       type: GET_USERS,
       payload: res.data
     });
-  } catch (err) {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUser = id => async dispatch => {
+  try {
+    await axios.delete(`/users/${id}`);
     dispatch({
-      type: USER_ERROR,
-      payload: { msg: err.response.statusText }
+      type: DELETE_USER,
+      payload: id
     });
+    dispatch(getUsers);
+  } catch (error) {
+    console.log(error);
   }
 };

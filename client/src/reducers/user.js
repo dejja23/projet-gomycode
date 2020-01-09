@@ -1,9 +1,8 @@
-import { GET_USERS, USER_ERROR } from '../actions/actionTypes';
+import { GET_USERS, DELETE_USER } from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
-  users: [],
-  error: {}
+  users: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -11,15 +10,16 @@ const userReducer = (state = initialState, action) => {
   switch (type) {
     case GET_USERS:
       return {
-        ...state,
         users: [...payload],
         loading: false
       };
-    case USER_ERROR:
+    case DELETE_USER:
       return {
         ...state,
-        error: payload
+        users: state.users.filter(user => user._id !== payload),
+        loading: false
       };
+
     default:
       return state;
   }

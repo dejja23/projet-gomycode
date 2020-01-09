@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ADS, ADS_ERROR } from './actionTypes';
+import { GET_ADS, DELETE_AD } from './actionTypes';
 
 export const getAds = (manufacturer, model) => async dispatch => {
   try {
@@ -16,9 +16,19 @@ export const getAds = (manufacturer, model) => async dispatch => {
       payload: res.data
     });
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteAd = id => async dispatch => {
+  try {
+    await axios.delete(`/annonces/${id}`);
     dispatch({
-      type: ADS_ERROR,
-      payload: { msg: error.response.statusText }
+      type: DELETE_AD,
+      payload: id
     });
+    dispatch(getAds);
+  } catch (error) {
+    console.log(error);
   }
 };

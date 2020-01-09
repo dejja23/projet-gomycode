@@ -19,7 +19,7 @@ export class UsersNav extends Component {
   state = {
     isOpen: false,
     name: '',
-    role: ''
+    role: 'Role'
   };
   changeHandler = event => {
     this.setState({
@@ -27,6 +27,7 @@ export class UsersNav extends Component {
       [event.target.name]: event.target.value
     });
   };
+
   toggle = () => this.setState({ isOpen: !this.state.isOpen });
   render() {
     return (
@@ -38,12 +39,33 @@ export class UsersNav extends Component {
             <Nav className='mr-auto' navbar>
               <UncontrolledDropdown nav inNavbar className='ml-5'>
                 <DropdownToggle nav caret>
-                  Role
+                  {this.state.role}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem> All</DropdownItem>
-                  <DropdownItem>Buyers </DropdownItem>
-                  <DropdownItem>Sellers </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      this.props.searchByRole('');
+                      this.setState({ role: 'All' });
+                    }}
+                  >
+                    All
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      this.props.searchByRole('Buyer');
+                      this.setState({ role: 'Buyer' });
+                    }}
+                  >
+                    Buyers
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      this.props.searchByRole('Seller');
+                      this.setState({ role: 'Seller' });
+                    }}
+                  >
+                    Sellers{' '}
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

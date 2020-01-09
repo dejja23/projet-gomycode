@@ -41,7 +41,9 @@ export class Dashbord extends Component {
           <Route
             exact
             path='/admin/ads'
-            render={() => <AdsTab ads={this.props.ads} />}
+            render={() => (
+              <AdsTab ads={this.props.ads} categories={this.props.categories} />
+            )}
           />
           <Route
             exact

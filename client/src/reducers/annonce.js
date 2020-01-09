@@ -1,9 +1,8 @@
-import { GET_ADS, ADS_ERROR } from '../actions/actionTypes';
+import { GET_ADS, DELETE_AD } from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
-  ads: [],
-  error: {}
+  ads: []
 };
 
 const adReducer = (state = initialState, action) => {
@@ -15,10 +14,11 @@ const adReducer = (state = initialState, action) => {
         ads: [...payload],
         loading: false
       };
-    case ADS_ERROR:
+    case DELETE_AD:
       return {
         ...state,
-        error: payload
+        ads: state.ads.filter(ad => ad._id !== payload),
+        loading: false
       };
     default:
       return state;

@@ -1,12 +1,38 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import AdsNav from './AdsNav';
+import { connect } from 'react-redux';
+import { deleteAd } from '../../actions/annonce';
 
 export class AdsTab extends Component {
+  state = {
+    sname: '',
+    smanufacturer: '',
+    smodel: ''
+  };
+  searchByName = name => {
+    this.setState({ sname: name, smanufacturer: '', smodel: '' });
+  };
+  searchByCategory = (manufacturer, model) => {
+    console.log(manufacturer, model);
+    return manufacturer
+      ? model
+        ? this.setState({
+            smanufacturer: manufacturer,
+            smodel: model,
+            sname: ''
+          })
+        : this.setState({ smanufacturer: manufacturer, smodel: '', sname: '' })
+      : null;
+  };
   render() {
     return (
       <>
-        <AdsNav />
+        <AdsNav
+          categories={this.props.categories}
+          searchByCategory={this.searchByCategory}
+          searchByName={this.searchByName}
+        />
         <Table hover>
           <thead>
             <tr>
@@ -19,20 +45,34 @@ export class AdsTab extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.ads.map(ad => (
-              <tr key={ad._id}>
-                <td>{ad.image}</td>
-                <td>{ad.title}</td>
-                <td>{ad.user.name}</td>
-                <td>
-                  {ad.category.manufacturer} {ad.category.model}
-                </td>
-                <td>{ad.price}</td>
-                <td>
-                  <i class='fas fa-trash'></i>
-                </td>
-              </tr>
-            ))}
+            {this.props.ads
+              .filter(ad =>
+                this.state.sname
+                  ? ad.title === this.state.sname
+                  : this.state.smanufacturer && this.state.smodel
+                  ? ad.category.manufacturer === this.state.smanufacturer &&
+                    ad.category.model === this.state.smodel
+                  : this.state.smanufacturer
+                  ? ad.category.manufacturer === this.state.smanufacturer
+                  : ad
+              )
+              .map(ad => (
+                <tr key={ad._id}>
+                  <td>{ad.image}</td>
+                  <td>{ad.title}</td>
+                  <td>{ad.user.name}</td>
+                  <td>
+                    {ad.category.manufacturer} {ad.category.model}
+                  </td>
+                  <td>{ad.price}</td>
+                  <td>
+                    <i
+                      class='fas fa-trash'
+                      onClick={() => this.props.deleteAd(ad._id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </>
@@ -40,4 +80,4 @@ export class AdsTab extends Component {
   }
 }
 
-export default AdsTab;
+export default connect(null, { deleteAd })(AdsTab);

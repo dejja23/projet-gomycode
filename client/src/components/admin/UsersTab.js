@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import UsersNav from './UsersNav';
+import { connect } from 'react-redux';
+import { deleteUser } from '../../actions/user';
 
 export class UsersTab extends Component {
   state = {
@@ -11,12 +13,9 @@ export class UsersTab extends Component {
     this.setState({ sname: name, srole: '' });
   };
   searchByRole = role => {
-    this.setState({ role: role, sname: '' });
+    this.setState({ srole: role, sname: '' });
   };
 
-  componentDidMount = () => {
-    this.setState({ users: this.props.users });
-  };
   render() {
     return (
       <>
@@ -41,7 +40,7 @@ export class UsersTab extends Component {
                 return this.state.sname
                   ? user.name === this.state.sname
                   : this.state.srole
-                  ? user.role === 'srole'
+                  ? user.role === this.state.srole
                   : user;
               })
               .map(user => (
@@ -51,7 +50,10 @@ export class UsersTab extends Component {
                   <td>{user.role}</td>
                   <td>{user.phone}</td>
                   <td>
-                    <i class='fas fa-trash'></i>
+                    <i
+                      class='fas fa-trash'
+                      onClick={() => this.props.deleteUser(user._id)}
+                    ></i>
                   </td>
                 </tr>
               ))}
@@ -62,4 +64,4 @@ export class UsersTab extends Component {
   }
 }
 
-export default UsersTab;
+export default connect(null, { deleteUser })(UsersTab);
