@@ -187,8 +187,14 @@ class Register extends Component {
                   type='select'
                   name='role'
                   onChange={this.changeHandler}
+                  onClick={() => {
+                    this.state.role === 'Buyer' &&
+                      this.setState({
+                        validate: { ...this.state.validate, telState: 'ok' }
+                      });
+                  }}
                 >
-                  <option value='Buyer'> Buyer</option>
+                  <option value='Buyer'>Buyer</option>
                   <option value='Seller'> Seller</option>
                 </Input>
               </FormGroup>
