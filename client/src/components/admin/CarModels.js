@@ -14,10 +14,10 @@ export class CarModels extends Component {
   render() {
     return (
       <>
-        <Table hover className=''>
+        <Table hover className='table-hover align-items-center'>
           <thead>
             <tr>
-              <th>Logo</th>
+              <th></th>
               <th>Manufacturer</th>
               <th>Model</th>
             </tr>
@@ -31,13 +31,13 @@ export class CarModels extends Component {
               .map(category => (
                 <tr key={category._id}>
                   <td>
-                    <img width='75px' src={category.logo} alt='..' />
+                    <img width='100px' src={category.logo} alt='..' />
                   </td>
                   <td>{category.manufacturer}</td>
                   <td>{category.model}</td>
                   <td className='text-center'>
                     <i
-                      class='fas fa-edit'
+                      class='fas fa-edit fa-2x'
                       onClick={() =>
                         this.setState({ modal: true, category: category })
                       }
@@ -45,7 +45,7 @@ export class CarModels extends Component {
                   </td>
                   <td className='text-center'>
                     <i
-                      class='fas fa-trash'
+                      class='fas fa-trash fa-2x'
                       onClick={() => this.props.deleteCategory(category._id)}
                     ></i>
                   </td>

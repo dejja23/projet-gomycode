@@ -20,8 +20,11 @@ export class CategoriesCard extends Component {
         <div className='d-flex flex-wrap justify-content-center align-items-center'>
           {this.removeDuplicates(this.props.categories, 'manufacturer').map(
             category => (
-              <Link to={`/admin/category/${category.manufacturer}`}>
-                <Card className='border-0 text-center m-2'>
+              <Link
+                to={`/admin/category/${category.manufacturer}`}
+                className='text-decoration-none'
+              >
+                <Card className='border-0 text-center m-2 category-cards'>
                   <CardImg
                     top
                     width='100%'
@@ -29,7 +32,9 @@ export class CategoriesCard extends Component {
                     alt='Card image cap'
                   />
                   <CardBody>
-                    <CardTitle>{category.manufacturer}</CardTitle>
+                    <CardTitle>
+                      <span className='car-man'>{category.manufacturer}</span>
+                    </CardTitle>
                   </CardBody>
                 </Card>
               </Link>
@@ -41,7 +46,7 @@ export class CategoriesCard extends Component {
               this.setState({ modal: true });
             }}
           >
-            <i class='fas fa-plus fa-7x '></i>
+            <i class='fas fa-plus fa-7x ml-3 '></i>
             <br />
           </span>
         </div>

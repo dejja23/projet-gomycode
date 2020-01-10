@@ -33,7 +33,7 @@ export class AdsTab extends Component {
           searchByCategory={this.searchByCategory}
           searchByName={this.searchByName}
         />
-        <Table hover>
+        <Table hover className='table-hover'>
           <thead>
             <tr>
               <th>Image</th>
@@ -58,7 +58,9 @@ export class AdsTab extends Component {
               )
               .map(ad => (
                 <tr key={ad._id}>
-                  <td>{ad.image}</td>
+                  <td>
+                    <img width='100px' src={ad.image} alt='..' />
+                  </td>
                   <td>{ad.title}</td>
                   <td>{ad.user.name}</td>
                   <td>
@@ -67,7 +69,7 @@ export class AdsTab extends Component {
                   <td>{ad.price}</td>
                   <td>
                     <i
-                      class='fas fa-trash'
+                      class='fas fa-trash fa-2x'
                       onClick={() => this.props.deleteAd(ad._id)}
                     ></i>
                   </td>

@@ -51,7 +51,7 @@ export class UsersTab extends Component {
                   <td>{user.phone}</td>
                   <td>
                     <i
-                      class='fas fa-trash'
+                      class='fas fa-trash fa-2x'
                       onClick={() => this.props.deleteUser(user._id)}
                     ></i>
                   </td>

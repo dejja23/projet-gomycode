@@ -48,8 +48,42 @@
   background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
 }
 
+.table-hover tbody tr td .fa-trash {
+  color: #f53844;
+}
+
+.table-hover tbody tr td {
+  font-size: 20px;
+}
+.table-hover tbody tr td .fa-edit {
+  color: #009ffd;
+}
+.table-hover tbody tr:hover td i {
+  color: white;
+}
+
 .table-hover tbody tr:hover td,
 .table tbody tr:hover th {
   background-color: #2876f9;
   color: white;
+}
+
+.table-hover thead tr th {
+  color: #2876f9;
+}
+
+.table-hover tbody tr td {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.car-man {
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+}
+.category-cards:hover .car-man {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2876f9;
 }

@@ -19,7 +19,7 @@ export class UsersNav extends Component {
   state = {
     isOpen: false,
     name: '',
-    role: 'Role'
+    role: ''
   };
   changeHandler = event => {
     this.setState({
@@ -39,7 +39,7 @@ export class UsersNav extends Component {
             <Nav className='mr-auto' navbar>
               <UncontrolledDropdown nav inNavbar className='ml-5'>
                 <DropdownToggle nav caret>
-                  {this.state.role}
+                  {this.state.role ? this.state.role : 'Role'}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem
@@ -77,8 +77,11 @@ export class UsersNav extends Component {
               />
               <InputGroupAddon addonType='append'>
                 <Button
-                  color='secondary'
-                  onClick={() => this.props.searchByName(this.state.name)}
+                  style={{ backgroundColor: '#2876f9' }}
+                  onClick={() => {
+                    this.props.searchByName(this.state.name);
+                    this.setState({ role: '' });
+                  }}
                 >
                   <i class='fas fa-search'></i>
                 </Button>

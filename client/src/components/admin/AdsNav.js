@@ -125,7 +125,7 @@ export class AdsNav extends Component {
               />
               <InputGroupAddon addonType='append'>
                 <Button
-                  color='secondary'
+                  style={{ backgroundColor: '#2876f9' }}
                   onClick={() => {
                     this.props.searchByName(this.state.title);
                     this.setState({ manufacturer: '', model: '' });
