@@ -18,11 +18,9 @@ const CardModel = props => {
         <span className='m-2 card-model-text'>{props.who}</span>
       </CardText>
 
-      <Button className='card-model-button'>
-        <Link to={props.to} className='text-white text-decoration-none'>
-          go to {props.who}
-        </Link>
-      </Button>
+      <Link to={props.to} className='text-white text-decoration-none w-100'>
+        <Button className='card-model-button w-100'>go to {props.who}</Button>
+      </Link>
     </Card>
   );
 };
