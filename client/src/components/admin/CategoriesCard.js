@@ -24,7 +24,7 @@ export class CategoriesCard extends Component {
                 to={`/admin/category/${category.manufacturer}`}
                 className='text-decoration-none'
               >
-                <Card className='border-0 text-center m-2 category-cards'>
+                <Card className='border-0 text-center  category-cards'>
                   <CardImg
                     top
                     width='100%'
@@ -40,15 +40,15 @@ export class CategoriesCard extends Component {
               </Link>
             )
           )}
-          <span
-            className='text-center'
+          <p
+            className='text-center ml-5'
             onClick={() => {
               this.setState({ modal: true });
             }}
           >
-            <i class='fas fa-plus fa-7x ml-3 '></i>
+            <i class='fas fa-plus fa-7x '></i>
             <br />
-          </span>
+          </p>
         </div>
         {this.state.modal ? (
           <CategoryForm
