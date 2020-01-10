@@ -31,7 +31,11 @@ export class Dashbord extends Component {
     return (
       <div>
         <NavAdmin />
-        <Cards />
+        <Cards
+          users={this.props.users}
+          ads={this.props.ads}
+          categories={this.props.categories}
+        />
         <Switch>
           <Route
             exact

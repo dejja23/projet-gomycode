@@ -1,14 +1,29 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 const NavAdmin = props => {
   return (
-    <Navbar color='primary' light expand='md'>
-      <NavbarBrand>Dashbord</NavbarBrand>
+    <Navbar className='navbar-admin shadow' light expand='md'>
+      <NavbarBrand className='dashbord'>Dashbord</NavbarBrand>
       <Nav className='ml-auto' navbar>
         <NavItem>
-          <i class='fas fa-sign-out-alt' onClick={() => props.logout()}></i>
+          <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+            <span className='nav-item-admin'>
+              {' '}
+              <i class='fas fa-home fa-3x text-white mr-4 '></i>
+            </span>
+          </Link>
+        </NavItem>
+        <NavItem>
+          <span className='nav-item-admin'>
+            {' '}
+            <i
+              class='fas fa-sign-out-alt fa-3x text-white'
+              onClick={() => props.logout()}
+            ></i>
+          </span>
         </NavItem>
       </Nav>
     </Navbar>

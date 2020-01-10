@@ -1,4 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-admin {
+  background-color: #2876f9;
+  background-image: linear-gradient(315deg, #2876f9 0%, #6d17cb 74%);
+}
+.nav-item-admin .fas:hover {
+  cursor: pointer;
+  color: black !important;
+}
+
+.dashbord {
+  font-size: 6vh !important;
+  font-weight: bolder !important;
+  color: white !important;
+}
+.card-model {
+  border-color: #2876f9;
+  border-radius: 8% !important;
+}
+.card-model-icon {
+  background-color: #2876f9;
+  background-image: linear-gradient(315deg, #2876f9 0%, #6d17cb 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-model-badge {
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  font-size: 3vh !important;
+}
+.card-model-text {
+  font-size: 4vh !important;
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-model-button {
+  border: none !important;
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+
 .table-hover tbody tr:hover td,
 .table tbody tr:hover th {
-  background-color: #7cffcb;
+  background-color: #2876f9;
+  color: white;
 }
