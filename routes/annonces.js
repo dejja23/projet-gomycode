@@ -13,19 +13,38 @@ const Annonce = require('../Models/annonce');
 // @access   Public
 router.get('/', async (req, res) => {
   try {
-    const annonces =
-      req.query.manufacturer && req.query.model
-        ? await Annonce.find({
-            category: {
-              manufacturer: req.query.manufacturer,
-              model: req.query.model
-            }
-          }).populate('user', '-password')
-        : req.query.manufacturer
-        ? await Annonce.find({
-            'category.manufacturer': req.query.manufacturer
-          }).populate('user', '-password')
-        : await Annonce.find().populate('user', '-password');
+    const annonces = req.query.user_id
+      ? await Annonce.find({ user: req.query.user_id })
+      : req.query.manufacturer && req.query.model
+      ? await Annonce.find({
+          category: {
+            manufacturer: req.query.manufacturer,
+            model: req.query.model
+          }
+        }).populate('user', '-password')
+      : req.query.manufacturer
+      ? await Annonce.find({
+          'category.manufacturer': req.query.manufacturer
+        }).populate('user', '-password')
+      : await Annonce.find().populate('user', '-password');
+
+    if (!annonces) return res.status(404).send({ msg: 'There are no ads yet' });
+
+    return res.send(annonces);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route    GET annonces/
+// @desc     get  recent 5 ads
+// @access   Public
+router.get('/recent', async (req, res) => {
+  try {
+    const annonces = await Annonce.find()
+      .limit(5)
+      .sort({ date: -1 });
 
     if (!annonces) return res.status(404).send({ msg: 'There are no ads yet' });
 
@@ -38,8 +57,8 @@ router.get('/', async (req, res) => {
 
 // @route    GET annonces/:id
 // @desc     get an ad
-// @access   Private
-router.get('/:id', auth, async (req, res) => {
+// @access   Public i guess
+router.get('/:id', async (req, res) => {
   try {
     const annonce = await Annonce.findById(req.params.id)
       .populate('user', '-password')
@@ -199,7 +218,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
     await annonce.save();
 
-    res.json(annonce.likes);
+    res.json(annonce);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -214,8 +233,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
     const annonce = await Annonce.findById(req.params.id);
 
     if (
-      annonce.likes.filter(like => like.user.toString() === req.user._id)
-        .length === 0
+      annonce.likes.filter(like => like.user._id === req.user._id).length === 0
     ) {
       return res.status(400).json({ msg: 'Ad has not yet been liked' });
     }
@@ -225,11 +243,10 @@ router.put('/unlike/:id', auth, async (req, res) => {
       .indexOf(req.user._id);
 
     annonce.likes.splice(removeIndex, 1);
-    console.log(annonce);
 
     await annonce.save();
 
-    res.json(annonce.likes);
+    res.json(annonce);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');

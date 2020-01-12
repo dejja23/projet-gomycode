@@ -16,7 +16,13 @@ export const GET_USERS = 'GET_USERS';
 export const DELETE_USER = 'DELETE_USER';
 
 export const GET_ADS = 'GET_ADS';
+export const GET_AD = 'GET_AD';
 export const DELETE_AD = 'DELETE_AD';
+
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+export const UPDATE_LIKES = 'UPDATE_LIKES';
 
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
