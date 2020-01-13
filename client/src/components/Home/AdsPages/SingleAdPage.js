@@ -58,7 +58,7 @@ class SingleAdPage extends Component {
                 onClick={() =>
                   this.props.user &&
                   (this.props.ad.likes.filter(
-                    like => like.user._id === this.props.user._id
+                    like => like.user.toString() === this.props.user._id
                   ).length
                     ? this.props.removeLike(this.props.ad._id)
                     : this.props.addLike(this.props.ad._id))

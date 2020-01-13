@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Card from './Cards/Card';
-import FooterPage from './Footer/FooterPage';
-import Main from './Mains/Main';
-import Navbar from './Navbar/Navbar';
+import AdCard from './Cards/AdCard';
+import HomeNav from './Navbar/HomeNav';
 import { Switch, Route } from 'react-router-dom';
 import AdsPage from './AdsPages/AdsPage';
 import SingleAdPage from './AdsPages/SingleAdPage';
@@ -12,7 +10,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <HomeNav />
 
         <Switch>
           <Route
@@ -20,12 +18,7 @@ export class Home extends Component {
             path='/'
             render={() => (
               <>
-                <img
-                  className='imgContainer'
-                  src='https://scontent.ftun9-1.fna.fbcdn.net/v/t1.0-9/s960x960/80489789_1761072980695550_245157081148030976_o.png?_nc_cat=102&_nc_ohc=OGnW3C_XBd0AQkbKxKHNrZHqC9E94NuSvYkYXrQYNOnrn643TlYr40zwQ&_nc_ht=scontent.ftun9-1.fna&oh=3897b6cf9849ab3b3856f06acf5fc523&oe=5EA65FF5'
-                />
-                <Card />
-                <Main />
+                <AdCard />
               </>
             )}
           />
@@ -33,7 +26,6 @@ export class Home extends Component {
           <Route exact path='/ads/:id' component={SingleAdPage} />
           <Route exact path='/myads' component={MyAds} />
         </Switch>
-        {/* <FooterPage /> */}
       </div>
     );
   }

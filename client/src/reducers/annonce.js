@@ -3,8 +3,7 @@ import {
   GET_AD,
   DELETE_AD,
   ADD_COMMENT,
-  DELETE_COMMENT,
-  UPDATE_LIKES
+  DELETE_COMMENT
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -34,13 +33,7 @@ const adReducer = (state = initialState, action) => {
         ads: state.ads.filter(ad => ad._id !== payload),
         loading: false
       };
-    case UPDATE_LIKES:
-      return {
-        ...state,
-        ad: payload,
 
-        loading: false
-      };
     case ADD_COMMENT:
       return {
         ...state,
@@ -56,6 +49,7 @@ const adReducer = (state = initialState, action) => {
         },
         loading: false
       };
+
     default:
       return state;
   }

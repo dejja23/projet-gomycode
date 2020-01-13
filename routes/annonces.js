@@ -191,7 +191,7 @@ router.delete('/:id', auth, async (req, res) => {
       return res
         .status(404)
         .send({ msg: 'The ad with the given ID was not found.' });
-    if (annonce.user !== req.user._id && req.user.role !== 'Admin')
+    if (annonce.user.toString() !== req.user._id && req.user.role !== 'Admin')
       return res.status(403).send({ msg: 'unauthorized' });
     annonce = await Annonce.findByIdAndDelete(req.params.id);
     res.send('ad removed');
@@ -233,7 +233,8 @@ router.put('/unlike/:id', auth, async (req, res) => {
     const annonce = await Annonce.findById(req.params.id);
 
     if (
-      annonce.likes.filter(like => like.user._id === req.user._id).length === 0
+      annonce.likes.filter(like => like.user.toString() === req.user._id)
+        .length === 0
     ) {
       return res.status(400).json({ msg: 'Ad has not yet been liked' });
     }

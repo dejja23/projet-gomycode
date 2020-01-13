@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAds } from '../../../actions/annonce';
+import { getAds, deleteAd } from '../../../actions/annonce';
 import { getCategories } from '../../../actions/category';
 import {
   Spinner,
@@ -64,7 +64,7 @@ class MyAds extends Component {
                         }
                       ></i>
                     </Button>
-                    <Button>
+                    <Button onClick={() => this.props.deleteAd(ad._id)}>
                       <i class='fas fa-trash'></i>
                     </Button>
                   </CardFooter>
@@ -99,4 +99,6 @@ const mapStateToProps = state => ({
   loading: state.adReducer.loading,
   categories: state.categoryReducer.categories
 });
-export default connect(mapStateToProps, { getAds, getCategories })(MyAds);
+export default connect(mapStateToProps, { getAds, deleteAd, getCategories })(
+  MyAds
+);

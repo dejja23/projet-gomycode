@@ -1,59 +1,94 @@
 import React, { Component } from 'react';
-import { Spinner, Button } from 'reactstrap';
-
+import {
+  Spinner,
+  Container,
+  Row,
+  Col,
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardFooter,
+  Button
+} from 'reactstrap';
+import AdsNav from './AdsNav';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAds } from '../../../actions/annonce';
+import { getCategories } from '../../../actions/category';
 
 class AdsPage extends Component {
+  state = { stitle: '' };
   componentDidMount() {
     this.props.getAds();
+    this.props.getCategories();
   }
+  searchBytitle = title => {
+    this.setState({ stitle: title });
+    this.props.getAds();
+  };
+  searchByCategory = (manufacturer, model) => {
+    return manufacturer
+      ? model
+        ? (this.setState({ stitle: '' }),
+          this.props.getAds(null, manufacturer, model))
+        : (this.setState({
+            smanufacturer: manufacturer,
+            smodel: '',
+            stitle: ''
+          }),
+          this.props.getAds(null, manufacturer))
+      : (this.setState({ stitle: '' }), this.props.getAds());
+  };
   render() {
-    console.log('ads', this.props.loading);
     return this.props.loading ? (
       <Spinner color='primary' />
     ) : (
-      <div className='wrapper'>
-        {this.props.ads.map(ad => (
-          <div className='cols'>
-            <div className='col' ontouchstart="this.classList.toggle('hover');">
-              <div class='container'>
-                <div
-                  className='front'
-                  style={{
-                    backgroundImage: `url(${ad.image})`
-                  }}
-                >
-                  <div className='inner'>
-                    <p>{ad.title}</p>
-                    <span>
-                      <span>{ad.category.manufacturer}</span>
-                      <span>{ad.category.model}</span>
-                    </span>
-                  </div>
-                </div>
-                <div className='back'>
-                  <div className='inner'>
-                    <p>{ad.descerption}</p>
-                    <p>
-                      {ad.price} <span>DT</span>
-                    </p>
-                    <Link to={`/ads/${ad._id}`}>
-                      <Button className='btn'>Read more</Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <>
+        <AdsNav
+          categories={this.props.categories}
+          searchByCategory={this.searchByCategory}
+          searchByName={this.searchBytitle}
+        />
+        <Container>
+          <Row className='d-flex'>
+            {this.props.ads
+              .filter(ad =>
+                this.state.stitle ? this.state.stitle === ad.title : ad
+              )
+              .map(ad => (
+                <Col>
+                  <Card>
+                    <CardImg
+                      top
+                      width='100%'
+                      src={ad.image}
+                      alt='Card image cap'
+                    />
+                    <CardBody>
+                      <CardTitle>{ad.title}</CardTitle>
+                      <CardSubtitle>
+                        {ad.category.manufacturer}
+                        {ad.category.model}
+                      </CardSubtitle>
+                      <CardText>{ad.descerption}</CardText>
+                      <CardText>{ad.price}</CardText>
+                    </CardBody>
+                    <CardFooter className='text-muted'></CardFooter>
+                  </Card>
+                </Col>
+              ))}
+          </Row>
+        </Container>
+      </>
     );
   }
 }
 const mapStateToProps = state => ({
   ads: state.adReducer.ads,
+  categories: state.categoryReducer.categories,
   loading: state.adReducer.loading
 });
-export default connect(mapStateToProps, { getAds })(AdsPage);
+export default connect(mapStateToProps, { getAds, getCategories })(AdsPage);

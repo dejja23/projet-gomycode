@@ -4,10 +4,8 @@ import {
   GET_AD,
   DELETE_AD,
   ADD_COMMENT,
-  DELETE_COMMENT,
-  UPDATE_LIKES
+  DELETE_COMMENT
 } from './actionTypes';
-import { setAlert } from './alert';
 
 export const getAds = (seller_id, manufacturer, model) => async dispatch => {
   try {
@@ -72,9 +70,8 @@ export const addAd = (
     });
     console.log(res);
     dispatch(getAds);
-  } catch (err) {
-    const error = err.response.data.msg;
-    error && dispatch(setAlert(error, 'danger'));
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -89,7 +86,7 @@ export const updateAd = (
 ) => async dispatch => {
   try {
     const category = { manufacturer, model };
-    const res = await axios.put(`/annonces/${id}`, {
+    await axios.put(`/annonces/${id}`, {
       title,
       descerption,
       image,
@@ -97,9 +94,8 @@ export const updateAd = (
       category
     });
     dispatch(getAds);
-  } catch (err) {
-    const error = err.response.data.msg;
-    error && dispatch(setAlert(error, 'danger'));
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -144,12 +140,8 @@ export const deleteComment = (id, comment_id) => async dispatch => {
 
 export const addLike = id => async dispatch => {
   try {
-    const res = await axios.put(`/annonces/like/${id}`);
-
-    dispatch({
-      type: UPDATE_LIKES,
-      payload: { id, likes: res.data }
-    });
+    await axios.put(`/annonces/like/${id}`);
+    dispatch(getAd(id));
   } catch (error) {
     console.log(error);
   }
@@ -157,11 +149,8 @@ export const addLike = id => async dispatch => {
 
 export const removeLike = id => async dispatch => {
   try {
-    const res = await axios.put(`/annonces/unlike/${id}`);
-    dispatch({
-      type: UPDATE_LIKES,
-      payload: { id, likes: res.data }
-    });
+    await axios.put(`/annonces/unlike/${id}`);
+    dispatch(getAd(id));
   } catch (error) {
     console.log(error);
   }
