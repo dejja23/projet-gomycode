@@ -130,7 +130,7 @@ export class AdsNav extends Component {
                 <Button
                   style={{ backgroundColor: '#2876f9' }}
                   onClick={() => {
-                    this.props.searchByName(this.state.title);
+                    this.props.searchByTitle(this.state.title);
                     this.setState({ manufacturer: '', model: '' });
                   }}
                 >

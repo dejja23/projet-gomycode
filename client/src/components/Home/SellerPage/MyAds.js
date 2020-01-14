@@ -4,7 +4,6 @@ import { getAds, deleteAd } from '../../../actions/annonce';
 import { getCategories } from '../../../actions/category';
 import {
   Spinner,
-  Container,
   Row,
   Col,
   Card,
@@ -24,7 +23,7 @@ class MyAds extends Component {
     isEdit: false,
     ad: null
   };
-  componentDidUpdate() {
+  componentDidMount() {
     this.props.getAds(this.props.user._id);
     this.props.getCategories();
   }
@@ -35,9 +34,9 @@ class MyAds extends Component {
       <Spinner color='primary' />
     ) : (
       <>
-        <Row md='4' sm='2' xs='1' className='m-2'>
+        <Row md='4' sm='2' xs='1'>
           {this.props.ads.map(ad => (
-            <Col>
+            <Col className='mt-4' key={ad._id}>
               <Card className='h-100 shadow-sm'>
                 <CardImg
                   top
@@ -67,29 +66,33 @@ class MyAds extends Component {
                     <sup className='ml-1'>DT</sup>
                   </CardText>
                 </CardBody>
-                <CardFooter className='text-muted'>
-                  <Button>
+                <CardFooter className='d-flex justify-content-between'>
+                  <Button color='light'>
                     <i
-                      class='fas fa-edit'
+                      className='fas fa-edit fa-lg text-info'
                       onClick={() =>
                         this.setState({ modal: true, isEdit: true, ad: ad })
                       }
                     ></i>
                   </Button>
-                  <Button onClick={() => this.props.deleteAd(ad._id)}>
-                    <i class='fas fa-trash'></i>
+                  <Button
+                    color='light'
+                    onClick={() => this.props.deleteAd(ad._id)}
+                  >
+                    <i className='fas fa-trash fa-lg text-danger'></i>
                   </Button>
                 </CardFooter>
               </Card>
             </Col>
           ))}
-          <div
+          <Col
+            className='d-flex align-items-center justify-content-center mt-4'
             onClick={() =>
               this.setState({ modal: true, isEdit: false, ad: null })
             }
           >
-            <i class='fas fa-plus'></i>
-          </div>
+            <i className='fas fa-plus fa-7x'></i>
+          </Col>
         </Row>
 
         {this.state.modal ? (
@@ -108,7 +111,7 @@ class MyAds extends Component {
 const mapStateToProps = state => ({
   user: state.authReducer.user,
   ads: state.adReducer.ads,
-  loading: state.adReducer.loading,
+  loading: state.adReducer.loading || state.categoryReducer.loading,
   categories: state.categoryReducer.categories
 });
 export default connect(mapStateToProps, { getAds, deleteAd, getCategories })(

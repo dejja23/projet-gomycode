@@ -25,7 +25,7 @@ class AdCards extends Component {
         <h1 className='header-card-section m-2'>Latest Ads</h1>
         <Row md='4' sm='2' xs='1' className='m-2'>
           {this.props.ads.map(ad => (
-            <Col>
+            <Col key={ad._id}>
               <Card className='h-100 shadow-sm'>
                 <CardImg
                   top

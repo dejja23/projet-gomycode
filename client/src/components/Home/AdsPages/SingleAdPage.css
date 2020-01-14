@@ -1,0 +1,23 @@
+.ad-title {
+  color: #08c8f6;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.ad-descrp {
+  font-size: 28px;
+}
+
+.like,
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.liked {
+  color: red;
+}
+
+.unliked {
+  color: #6c757d;
+}

@@ -1,11 +1,5 @@
 import axios from 'axios';
-import {
-  GET_ADS,
-  GET_AD,
-  DELETE_AD,
-  ADD_COMMENT,
-  DELETE_COMMENT
-} from './actionTypes';
+import { GET_ADS, GET_AD, DELETE_AD } from './actionTypes';
 
 export const getAds = (seller_id, manufacturer, model) => async dispatch => {
   console.log(seller_id, manufacturer, model);
@@ -117,12 +111,9 @@ export const deleteAd = id => async dispatch => {
 
 export const addComment = (id, text) => async dispatch => {
   try {
-    const res = await axios.post(`/annonces/comment/${id}`, { text });
+    await axios.post(`/annonces/comment/${id}`, { text });
 
-    dispatch({
-      type: ADD_COMMENT,
-      payload: res.data
-    });
+    dispatch(getAd(id));
   } catch (error) {
     console.log(error);
   }
@@ -132,10 +123,7 @@ export const deleteComment = (id, comment_id) => async dispatch => {
   try {
     await axios.delete(`/annonces/comment/${id}/${comment_id}`);
 
-    dispatch({
-      type: DELETE_COMMENT,
-      payload: comment_id
-    });
+    dispatch(getAd(id));
   } catch (error) {
     console.log(error);
   }

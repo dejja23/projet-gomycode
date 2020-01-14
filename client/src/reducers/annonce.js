@@ -1,10 +1,4 @@
-import {
-  GET_ADS,
-  GET_AD,
-  DELETE_AD,
-  ADD_COMMENT,
-  DELETE_COMMENT
-} from '../actions/actionTypes';
+import { GET_ADS, GET_AD, DELETE_AD } from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
@@ -33,23 +27,6 @@ const adReducer = (state = initialState, action) => {
         ads: state.ads.filter(ad => ad._id !== payload),
         loading: false
       };
-
-    case ADD_COMMENT:
-      return {
-        ...state,
-        ad: { ...state.ad, Comments: payload },
-        loading: false
-      };
-    case DELETE_COMMENT:
-      return {
-        ...state,
-        ad: {
-          ...state.ad,
-          Comments: state.ad.Comments.filter(comment => comment._id !== payload)
-        },
-        loading: false
-      };
-
     default:
       return state;
   }

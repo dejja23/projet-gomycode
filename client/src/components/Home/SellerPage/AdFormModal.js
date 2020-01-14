@@ -116,8 +116,9 @@ class AdFormModal extends Component {
             <InputGroupAddon addonType='prepend' style={{ width: '125px' }}>
               <InputGroupText className='w-100'>category</InputGroupText>
             </InputGroupAddon>
-            <UncontrolledDropdown>
-              <DropdownToggle caret>
+
+            <UncontrolledDropdown className='mr-4 ml-4'>
+              <DropdownToggle color='transparent' caret>
                 {this.state.manufacturer ? (
                   <>
                     {' '}
@@ -159,7 +160,7 @@ class AdFormModal extends Component {
               </DropdownMenu>
             </UncontrolledDropdown>
             <UncontrolledDropdown>
-              <DropdownToggle caret>
+              <DropdownToggle color='transparent' caret>
                 {this.state.model ? this.state.model : 'Model'}
               </DropdownToggle>
               {this.state.manufacturer && (

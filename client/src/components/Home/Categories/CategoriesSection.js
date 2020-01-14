@@ -25,24 +25,24 @@ export class CategoriesSection extends Component {
         <div className='d-flex flex-wrap justify-content-center align-items-center'>
           {this.removeDuplicates(this.props.categories, 'manufacturer').map(
             category => (
-              <Link
+              <Card
+                key={category._id}
+                tag={Link}
                 to={`/ads/category/${category.manufacturer}`}
-                className='text-decoration-none'
+                className='border-0 text-center  category-cards'
               >
-                <Card className='border-0 text-center  category-cards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    src={category.logo}
-                    alt='Card image cap'
-                  />
-                  <CardBody>
-                    <CardTitle>
-                      <span className='car-man'>{category.manufacturer}</span>
-                    </CardTitle>
-                  </CardBody>
-                </Card>
-              </Link>
+                <CardImg
+                  top
+                  width='100%'
+                  src={category.logo}
+                  alt='Card image cap'
+                />
+                <CardBody>
+                  <CardTitle>
+                    <span className='car-man'>{category.manufacturer}</span>
+                  </CardTitle>
+                </CardBody>
+              </Card>
             )
           )}
         </div>

@@ -7,6 +7,7 @@ import {
   addComment,
   deleteComment
 } from '../../../actions/annonce';
+import Moment from 'react-moment';
 import {
   Row,
   Col,
@@ -18,6 +19,8 @@ import {
   ListGroupItemHeading,
   ListGroupItemText
 } from 'reactstrap';
+
+import './SingleAdPage.css';
 import { Link } from 'react-router-dom';
 
 class SingleAdPage extends Component {
@@ -38,75 +41,105 @@ class SingleAdPage extends Component {
     return this.props.loading || !this.props.ad ? (
       <Spinner color='primary' />
     ) : (
-      <div>
-        <Row>
-          <Col>
-            <img src={this.props.ad.image} />
+      <div className='m-auto w-75'>
+        <Row md='2' xs='1'>
+          <Col className='d-flex align-items-center'>
+            <img src={this.props.ad.image} width='100%' alt='...' />
           </Col>
           <Col>
-            <h2>{this.props.ad.title}</h2>
+            <h2 className='ad-title text-center'>{this.props.ad.title}</h2>
             <h4>
-              <span>{this.props.ad.category.manufacturer}</span>
-              <span>{this.props.ad.category.model}</span>
+              <img src={this.props.ad.category.logo} width='100px' alt='...' />
+              <span className='text-secondary font-weight-bold ml-1 mr-1'>
+                {this.props.ad.category.manufacturer}
+              </span>
+              <span className='text-secondary font-weight-bold text-bold'>
+                {this.props.ad.category.model}
+              </span>
             </h4>
 
-            <h4>{this.props.ad.descerption}</h4>
-
-            <p>
-              <i
-                class='fas fa-heart'
-                onClick={() =>
-                  this.props.user &&
-                  (this.props.ad.likes.filter(
-                    like => like.user.toString() === this.props.user._id
-                  ).length
-                    ? this.props.removeLike(this.props.ad._id)
-                    : this.props.addLike(this.props.ad._id))
-                }
-              ></i>
-              {this.props.ad.likes.length}
-              {this.props.ad.likes.length === 1 ? '  Like' : 'Likes'}
-            </p>
-            <p>
-              <span>
-                {this.props.ad.price} <span>DT</span>
+            <h4 className='ad-descrp'>{this.props.ad.descerption}</h4>
+            <Col className='mt-4 mb-4 d-flex justify-content-between '>
+              <span className='like text-secondary'>
+                <i
+                  className={
+                    this.props.user &&
+                    this.props.ad.likes.filter(
+                      like => like.user.toString() === this.props.user._id
+                    ).length
+                      ? 'liked fas fa-heart fa-lg mr-2'
+                      : 'unliked fas fa-heart fa-lg mr-2'
+                  }
+                  onClick={() =>
+                    this.props.user &&
+                    (this.props.ad.likes.filter(
+                      like => like.user.toString() === this.props.user._id
+                    ).length
+                      ? this.props.removeLike(this.props.ad._id)
+                      : this.props.addLike(this.props.ad._id))
+                  }
+                ></i>
+                <span>
+                  <span className='mr-1'> {this.props.ad.likes.length}</span>
+                  {this.props.ad.likes.length === 1 ? '  Like' : 'Likes'}
+                </span>
               </span>
-            </p>
+              <span>
+                <span className='price text-secondary'>
+                  {this.props.ad.price} <sup>DT</sup>
+                </span>
+              </span>
+            </Col>
 
             {this.props.isAuthenticated ? (
-              <div>
-                <p>Posted by:{this.props.ad.user.name}</p>
-                <p>email adress:{this.props.ad.user.email}</p>
-                <p>phone number:{this.props.ad.user.phone}</p>
+              <div className='m-2 p-3 '>
+                <p>
+                  <span className='mr-2 font-weight-bold text-secondary'>
+                    Posted by:
+                  </span>
+                  {this.props.ad.user.name}
+                </p>
+                <p>
+                  <span className='mr-2 font-weight-bold text-secondary'>
+                    email adress:
+                  </span>
+                  {this.props.ad.user.email}
+                </p>
+                <p>
+                  <span className='mr-2 font-weight-bold text-secondary'>
+                    phone number:
+                  </span>
+                  {this.props.ad.user.phone}
+                </p>
               </div>
             ) : (
               <p>
                 you must have an account to view the seller information
-                <Link to='/login'>login</Link>
+                <Link to='/login'> login</Link>
               </p>
             )}
           </Col>
         </Row>
         <div>
           <ListGroup>
-            <ListGroupItem active>
+            <ListGroupItem>
               <ListGroupItemHeading>
-                <p>
-                  <span>{this.props.ad.Comments.length}</span> Comments
+                <p className='text-primary font-size-bold'>
+                  <span>{this.props.ad.Comments.length}</span>{' '}
+                  {this.props.ad.Comments.length === 1 ? 'Comment' : 'Comments'}
                 </p>
               </ListGroupItemHeading>
             </ListGroupItem>
             {this.props.ad.Comments.map(comment => (
-              <ListGroupItem>
-                <ListGroupItemHeading>{comment.user.name}</ListGroupItemHeading>
-                <ListGroupItemText>{comment.text}</ListGroupItemText>
-                <ListGroupItemText>{comment.date}</ListGroupItemText>
-                {this.props.isAuthenticated &&
-                  (this.props.user._id === comment.user._id ||
-                    this.props.user.role === 'Admin') && (
-                    <div>
+              <ListGroupItem key={comment._id}>
+                <ListGroupItemHeading className='d-flex justify-content-between'>
+                  <span className='font-size-bolder'>{comment.user.name}</span>{' '}
+                  {this.props.isAuthenticated &&
+                    (this.props.user._id === comment.user._id ||
+                      this.props.user.role === 'Admin') && (
                       <span>
                         <i
+                          style={{ color: 'red' }}
                           class='fas fa-trash'
                           onClick={() =>
                             this.props.deleteComment(
@@ -116,8 +149,18 @@ class SingleAdPage extends Component {
                           }
                         ></i>
                       </span>
-                    </div>
-                  )}
+                    )}
+                </ListGroupItemHeading>
+                <ListGroupItemText>{comment.text}</ListGroupItemText>
+                <ListGroupItemText
+                  style={{ fontSize: '12px' }}
+                  className='text-right text-secondary'
+                >
+                  Posted on:{' '}
+                  <Moment format='YYYY/MM/DD HH:mm' className='comment-date'>
+                    {comment.date}
+                  </Moment>
+                </ListGroupItemText>
               </ListGroupItem>
             ))}
             <ListGroupItem>
@@ -140,6 +183,9 @@ class SingleAdPage extends Component {
                       );
                       this.setState({ comment: '' });
                     }}
+                    outline
+                    color='primary'
+                    className='mt-2'
                   >
                     Add a comment
                   </Button>
@@ -147,7 +193,7 @@ class SingleAdPage extends Component {
               ) : (
                 <p>
                   you must have a buyer account to write comments
-                  <Link to='/login'>login</Link>
+                  <Link to='/login'> login</Link>
                 </p>
               )}
             </ListGroupItem>

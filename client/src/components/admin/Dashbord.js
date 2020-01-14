@@ -12,6 +12,7 @@ import { loadUser } from '../../actions/auth';
 import { getUsers } from '../../actions/user';
 import { getAds } from '../../actions/annonce';
 import { getCategories } from '../../actions/category';
+import { Spinner } from 'reactstrap';
 import Cards from './Cards';
 export class Dashbord extends Component {
   componentDidMount() {
@@ -28,7 +29,9 @@ export class Dashbord extends Component {
     if (this.props.user) {
       if (this.props.user.role !== 'Admin') return <Redirect to='/' />;
     }
-    return (
+    return this.props.loading ? (
+      <Spinner color='primary' />
+    ) : (
       <div>
         <NavAdmin />
         <Cards
@@ -68,7 +71,11 @@ export class Dashbord extends Component {
 }
 const mapStateToProps = state => ({
   user: state.authReducer.user,
-  loading: state.authReducer.loading,
+  loading:
+    state.authReducer.loading ||
+    state.adReducer.loading ||
+    state.userReducer.loading ||
+    state.categoryReducer.loading,
   users: state.userReducer.users,
   ads: state.adReducer.ads,
   categories: state.categoryReducer.categories

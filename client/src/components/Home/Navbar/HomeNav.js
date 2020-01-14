@@ -15,7 +15,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
   Spinner
 } from 'reactstrap';
 import './HomeNav.css';
@@ -32,31 +31,23 @@ class HomeNav extends Component {
       <Navbar className='home-nav shadow-sm  ' expand='md'>
         <NavbarBrand className='d-flex align-items-center'>
           <span style={{ fontSize: '36px' }}>GO</span>{' '}
-          <i class='fas fa-ad fa-3x ml-1'></i>
+          <i className='fas fa-ad fa-3x ml-1'></i>
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle}>
-          <i class='fas fa-bars fa-3x' style={{ color: 'white' }}></i>
+          <i className='fas fa-bars fa-3x' style={{ color: 'white' }}></i>
         </NavbarToggler>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className='mr-auto' navbar>
             <NavItem>
-              <NavLink
-                tag={Link}
-                exact
-                to='/'
-                className='mr-3 text-decoration-none'
-                activeClassName='current'
-              >
+              <NavLink tag={Link} to='/' className='mr-3 text-decoration-none'>
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 tag={Link}
-                exact
                 to='/ads'
                 className='mr-3 text-decoration-none'
-                activeClassName='current'
               >
                 Ads
               </NavLink>
@@ -88,7 +79,7 @@ class HomeNav extends Component {
               <UncontrolledDropdown>
                 <DropdownToggle className='bg-transparent border-0' caret>
                   <i
-                    class='fa fa-fw fa-user fa-3x'
+                    className='fa fa-fw fa-user fa-3x'
                     style={{ color: 'white' }}
                   ></i>
                 </DropdownToggle>
@@ -99,7 +90,7 @@ class HomeNav extends Component {
                       to='/myads'
                       className=' text-decoration-none'
                     >
-                      <i class='fas fa-ad mr-1'></i> <span>My Ads</span>
+                      <i className='fas fa-ad mr-1'></i> <span>My Ads</span>
                     </DropdownItem>
                   )}
                   {this.props.user.role === 'Admin' && (
@@ -112,10 +103,12 @@ class HomeNav extends Component {
                     </DropdownItem>
                   )}
                   <DropdownItem
+                    tag={Link}
+                    to='/'
                     className=' text-decoration-none'
                     onClick={this.props.logout}
                   >
-                    <i class='fas fa-sign-out-alt mr-2'></i>
+                    <i className='fas fa-sign-out-alt mr-2'></i>
                     <span>Log out</span>
                   </DropdownItem>
                 </DropdownMenu>
