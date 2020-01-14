@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Spinner,
-  Container,
+  Button,
   Row,
   Col,
   Card,
@@ -10,53 +9,20 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardFooter,
-  Button
+  CardFooter
 } from 'reactstrap';
-import AdsNav from './AdsNav';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getAds } from '../../../actions/annonce';
-import { getCategories } from '../../../actions/category';
-// import '../Cards/AdCards.css';
-
-class AdsPage extends Component {
-  state = { stitle: '' };
+import { getRecentAds } from '../../../actions/annonce';
+import './AdCards.css';
+class AdCards extends Component {
   componentDidMount() {
-    this.props.match.params.category
-      ? this.props.getAds(null, this.props.match.params.category)
-      : this.props.getAds();
-    this.props.getCategories();
+    this.props.getRecentAds();
   }
-  searchBytitle = title => {
-    this.setState({ stitle: title });
-    this.props.getAds();
-  };
-  searchByCategory = (manufacturer, model) => {
-    console.log(manufacturer, model);
-    return manufacturer
-      ? model
-        ? (this.setState({ stitle: '' }),
-          this.props.getAds(null, manufacturer, model))
-        : (this.setState({
-            smanufacturer: manufacturer,
-            smodel: '',
-            stitle: ''
-          }),
-          this.props.getAds(null, manufacturer))
-      : (this.setState({ stitle: '' }), this.props.getAds());
-  };
   render() {
-    return this.props.loading ? (
-      <Spinner color='primary' />
-    ) : (
+    return (
       <>
-        <AdsNav
-          categories={this.props.categories}
-          searchByCategory={this.searchByCategory}
-          searchByName={this.searchBytitle}
-        />
-
+        <h1 className='header-card-section m-2'>Latest Ads</h1>
         <Row md='4' sm='2' xs='1' className='m-2'>
           {this.props.ads.map(ad => (
             <Col>
@@ -84,7 +50,7 @@ class AdsPage extends Component {
                       <span className='ml-1'> {ad.category.model}</span>
                     </span>
                   </CardSubtitle>
-                  <CardText className='mt-3 mb-2 text-right text-secondary car-price'>
+                  <CardText className='mt-3 text-right text-secondary car-price'>
                     {ad.price}
                     <sup className='ml-1'>DT</sup>
                   </CardText>
@@ -102,13 +68,20 @@ class AdsPage extends Component {
             </Col>
           ))}
         </Row>
+        <div className='d-flex justify-content-end'>
+          <Button
+            tag={Link}
+            to='/ads'
+            className='text-decoration-none m-2 see-more-ads'
+          >
+            see more ads
+          </Button>
+        </div>
       </>
     );
   }
 }
 const mapStateToProps = state => ({
-  ads: state.adReducer.ads,
-  categories: state.categoryReducer.categories,
-  loading: state.adReducer.loading
+  ads: state.adReducer.ads
 });
-export default connect(mapStateToProps, { getAds, getCategories })(AdsPage);
+export default connect(mapStateToProps, { getRecentAds })(AdCards);

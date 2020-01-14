@@ -17,10 +17,10 @@ router.get('/', async (req, res) => {
       ? await Annonce.find({ user: req.query.user_id })
       : req.query.manufacturer && req.query.model
       ? await Annonce.find({
-          category: {
-            manufacturer: req.query.manufacturer,
-            model: req.query.model
-          }
+          $and: [
+            { 'category.manufacturer': req.query.manufacturer },
+            { 'category.model': req.query.model }
+          ]
         }).populate('user', '-password')
       : req.query.manufacturer
       ? await Annonce.find({
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
 router.get('/recent', async (req, res) => {
   try {
     const annonces = await Annonce.find()
-      .limit(5)
+      .limit(4)
       .sort({ date: -1 });
 
     if (!annonces) return res.status(404).send({ msg: 'There are no ads yet' });

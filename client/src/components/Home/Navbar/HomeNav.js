@@ -29,7 +29,7 @@ class HomeNav extends Component {
     return this.props.loading ? (
       <Spinner color='primary' className='text-center' />
     ) : (
-      <Navbar className='home-nav shadow-sm fixed' expand='md'>
+      <Navbar className='home-nav shadow-sm  ' expand='md'>
         <NavbarBrand className='d-flex align-items-center'>
           <span style={{ fontSize: '36px' }}>GO</span>{' '}
           <i class='fas fa-ad fa-3x ml-1'></i>

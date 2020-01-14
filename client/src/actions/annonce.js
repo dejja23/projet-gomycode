@@ -8,6 +8,7 @@ import {
 } from './actionTypes';
 
 export const getAds = (seller_id, manufacturer, model) => async dispatch => {
+  console.log(seller_id, manufacturer, model);
   try {
     const res = seller_id
       ? await axios.get(`/annonces?user_id=${seller_id}`)
@@ -57,10 +58,11 @@ export const addAd = (
   image,
   price,
   manufacturer,
-  model
+  model,
+  logo
 ) => async dispatch => {
   try {
-    const category = { manufacturer, model };
+    const category = { manufacturer, model, logo };
     const res = await axios.post('/annonces/', {
       title,
       descerption,
@@ -82,10 +84,11 @@ export const updateAd = (
   image,
   price,
   manufacturer,
-  model
+  model,
+  logo
 ) => async dispatch => {
   try {
-    const category = { manufacturer, model };
+    const category = { manufacturer, model, logo };
     await axios.put(`/annonces/${id}`, {
       title,
       descerption,

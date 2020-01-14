@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header-card-section {
+  color: #08c8f6;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.car-title {
+  font-size: 28px;
+  color: #08c8f6;
+}
+
+.car-category {
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.car-price {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.go-to-btn {
+  width: 100%;
+  border: none !important;
+  background-color: #4d5dfb;
+  background-image: linear-gradient(315deg, #4d5dfb 0%, #08c8f6 74%);
+}
+
+.see-more-ads {
+  border: none !important;
+  background-color: transparent !important;
+  color: #08c8f6 !important;
+  font-size: 36px !important;
+  font-weight: bold !important;
+}

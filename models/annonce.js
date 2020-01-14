@@ -26,6 +26,9 @@ const AnnonceSchema = new Schema({
     model: {
       type: String,
       required: true
+    },
+    logo: {
+      type: String
     }
   },
   price: {

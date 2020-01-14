@@ -27,6 +27,7 @@ class AdFormModal extends Component {
     image: this.props.isEdit ? this.props.ad.image : '',
     manufacturer: this.props.isEdit ? this.props.ad.category.manufacturer : '',
     model: this.props.isEdit ? this.props.ad.category.model : '',
+    logo: this.props.isEdit ? this.props.ad.category.logo : '',
     price: this.props.isEdit ? this.props.ad.price : ''
   };
 
@@ -45,7 +46,6 @@ class AdFormModal extends Component {
     });
   };
   handleClick = () => {
-    console.log(this.state.manufacturer, this.state.logo, this.state.model);
     this.props.isEdit
       ? this.props.updateAd(
           this.props.ad._id,
@@ -54,7 +54,8 @@ class AdFormModal extends Component {
           this.state.image,
           this.state.price,
           this.state.manufacturer,
-          this.state.model
+          this.state.model,
+          this.state.logo
         )
       : this.props.addAd(
           this.state.title,
@@ -62,7 +63,8 @@ class AdFormModal extends Component {
           this.state.image,
           this.state.price,
           this.state.manufacturer,
-          this.state.model
+          this.state.model,
+          this.state.logo
         );
   };
   render() {
@@ -116,9 +118,19 @@ class AdFormModal extends Component {
             </InputGroupAddon>
             <UncontrolledDropdown>
               <DropdownToggle caret>
-                {this.state.manufacturer
-                  ? this.state.manufacturer
-                  : 'manufacturer'}
+                {this.state.manufacturer ? (
+                  <>
+                    {' '}
+                    <img
+                      src={this.state.logo}
+                      alt='...'
+                      style={{ width: '36px', marginRight: '5px' }}
+                    />{' '}
+                    <span>{this.state.manufacturer}</span>
+                  </>
+                ) : (
+                  'manufacturer'
+                )}
               </DropdownToggle>
               <DropdownMenu>
                 {this.removeDuplicates(
@@ -130,7 +142,7 @@ class AdFormModal extends Component {
                     onClick={() => {
                       this.setState({
                         manufacturer: category.manufacturer,
-
+                        logo: category.logo,
                         model: ''
                       });
                     }}
