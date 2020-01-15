@@ -24,12 +24,13 @@ class MyAds extends Component {
     ad: null
   };
   componentDidMount() {
-    this.props.getAds(this.props.user._id);
+    this.props.user && this.props.getAds(this.props.user._id);
     this.props.getCategories();
   }
   toggle = () => this.setState({ modal: !this.state.modal });
 
   render() {
+    console.log(this.props.user);
     return this.props.loading ? (
       <Spinner color='primary' />
     ) : (
@@ -61,6 +62,10 @@ class MyAds extends Component {
                       <span className='ml-1'> {ad.category.model}</span>
                     </span>
                   </CardSubtitle>
+                  <CardText className='mt-3 mb-2 text-right text-secondary car-price'>
+                    {ad.descreption}
+                    <sup className='ml-1'>DT</sup>
+                  </CardText>
                   <CardText className='mt-3 mb-2 text-right text-secondary car-price'>
                     {ad.price}
                     <sup className='ml-1'>DT</sup>
@@ -114,6 +119,8 @@ const mapStateToProps = state => ({
   loading: state.adReducer.loading || state.categoryReducer.loading,
   categories: state.categoryReducer.categories
 });
-export default connect(mapStateToProps, { getAds, deleteAd, getCategories })(
-  MyAds
-);
+export default connect(mapStateToProps, {
+  getAds,
+  deleteAd,
+  getCategories
+})(MyAds);

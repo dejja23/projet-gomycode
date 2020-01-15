@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ADS, GET_AD, DELETE_AD } from './actionTypes';
+import { GET_ADS, GET_AD, ADD_AD, UPDATE_AD, DELETE_AD } from './actionTypes';
 
 export const getAds = (seller_id, manufacturer, model) => async dispatch => {
   console.log(seller_id, manufacturer, model);
@@ -64,8 +64,11 @@ export const addAd = (
       price,
       category
     });
-    console.log(res);
-    dispatch(getAds);
+
+    dispatch({
+      type: ADD_AD,
+      payload: res.data
+    });
   } catch (error) {
     console.log(error);
   }
@@ -83,14 +86,17 @@ export const updateAd = (
 ) => async dispatch => {
   try {
     const category = { manufacturer, model, logo };
-    await axios.put(`/annonces/${id}`, {
+    const res = await axios.put(`/annonces/${id}`, {
       title,
       descerption,
       image,
       price,
       category
     });
-    dispatch(getAds);
+    dispatch({
+      type: UPDATE_AD,
+      payload: res.data
+    });
   } catch (error) {
     console.log(error);
   }

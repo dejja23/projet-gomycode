@@ -1,4 +1,10 @@
-import { GET_ADS, GET_AD, DELETE_AD } from '../actions/actionTypes';
+import {
+  GET_ADS,
+  GET_AD,
+  ADD_AD,
+  UPDATE_AD,
+  DELETE_AD
+} from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
@@ -20,6 +26,16 @@ const adReducer = (state = initialState, action) => {
         ...state,
         ad: payload,
         loading: false
+      };
+    case ADD_AD:
+      return {
+        ...state,
+        ads: [...state.ads, payload]
+      };
+    case UPDATE_AD:
+      return {
+        ...state,
+        ads: state.ads.map(ad => (ad._id === payload._id ? payload : ad))
       };
     case DELETE_AD:
       return {
