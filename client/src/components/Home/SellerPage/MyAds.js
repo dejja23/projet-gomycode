@@ -62,16 +62,13 @@ class MyAds extends Component {
                       <span className='ml-1'> {ad.category.model}</span>
                     </span>
                   </CardSubtitle>
-                  <CardText className='mt-3 mb-2 text-right text-secondary car-price'>
-                    {ad.descreption}
-                    <sup className='ml-1'>DT</sup>
-                  </CardText>
+
                   <CardText className='mt-3 mb-2 text-right text-secondary car-price'>
                     {ad.price}
                     <sup className='ml-1'>DT</sup>
                   </CardText>
                 </CardBody>
-                <CardFooter className='d-flex justify-content-between'>
+                <CardFooter className='d-flex justify-content-between mt-1'>
                   <Button color='light'>
                     <i
                       className='fas fa-edit fa-lg text-info'
