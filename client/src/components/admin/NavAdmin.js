@@ -12,7 +12,7 @@ const NavAdmin = props => {
           <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
             <span className='nav-item-admin'>
               {' '}
-              <i class='fas fa-home fa-3x text-white mr-4 '></i>
+              <i className='fas fa-home fa-3x text-white mr-4 '></i>
             </span>
           </Link>
         </NavItem>
@@ -20,7 +20,7 @@ const NavAdmin = props => {
           <span className='nav-item-admin'>
             {' '}
             <i
-              class='fas fa-sign-out-alt fa-3x text-white'
+              className='fas fa-sign-out-alt fa-3x text-white'
               onClick={() => props.logout()}
             ></i>
           </span>

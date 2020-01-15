@@ -21,6 +21,7 @@ export class CategoriesCard extends Component {
           {this.removeDuplicates(this.props.categories, 'manufacturer').map(
             category => (
               <Link
+                key={category._id}
                 to={`/admin/category/${category.manufacturer}`}
                 className='text-decoration-none'
               >
